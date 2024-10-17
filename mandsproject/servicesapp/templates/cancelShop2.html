@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Imprimir recibo</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <div class="col-4 text-center">
+          APRECIADO CLIENTE: {{user}} con el correo {{correo}} <br />Su compra
+          fue:
+          <br />
+          <br />
+          <br />
+          {% for z,v in data %}{{v.name}} DESCRIPCION DEL ARTICULO:
+          {{v.description}}
+          <br />
+          CANTIDAD SOLICITADA: {{v.cant}}
+          <br />
+          VALOR ARTICULO: {{v.price}}00
+          <br />
+          {% endfor %}
+          <br />
+          TOTAL: {{val}}
+          <br />
+          <br />
+
+          PROCEDE A CANCELAR EL VALOR DE TU COMPRA EN LAS SIGUIENTES<br />
+          CUENTAS O A TRAVES DE NUESTROS CODIGOS QR BANCOLOMBIA: 13242344
+          <br />NEQUI: 3424324<br />
+          DAVIPLATA: 3423242 <br />CLICK PARA INFORMAR DEL PAGO Y PROCESAR TU
+          PEDIDO - ESTA NOTIFICACIÓN NOS LLEGARÁ INMEDIATAMENTE <br />GRACIAS
+          POR PREFERIRNOS <br />- LA FACTURA SE ENVIÓ AL CORREO DEL USUARIO
+          ESTAMOS ATENTOS CUALQUIER INQUIETUD, RECUERDA QUE AL FINAL DE NUESTRA
+          PAGINA TENEMOS NUESTRO FORMULARI DE CONTACTO PARA CUALQUIER FEEDBACK O
+          GET IN TOUCH <br /><br />
+          NOS CONTACTAREMOS INMEDIATEMENTE EN CASO DE QUE HAYAS PEDIDO ALGO PARA
+          LLEVAR! Al numero registrado en el formulario
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-5"><br /></div>
+    <div class="d-flex container mt-5">
+      <div class="row justify-content-center">
+        <div class="col-4 text-center">
+          <button onclick="window.print()" class="btn btn-primary">
+            Imprimir recibo
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+  </body>
+</html>

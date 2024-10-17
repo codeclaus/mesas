@@ -1,0 +1,25 @@
+
+{% extends "base.html" %} {% load static %} {% block content %}
+<div class="container">
+    {% load crispy_forms_tags %}
+  {% comment %} {% if "aprobado" in request.GET %}
+  <p style="color: blue; text-align: center">
+    INFORMACION CARGADA EN EL SITEMA SATISFACTORIAMENTE!!!!
+  </p>
+  {% endif %} {% endcomment %}
+  <form action="" method="POST" style="text-align: left; padding: 10px 30px">
+    {% csrf_token %}
+    <table style="margin: 40px auto">
+        {% if messages %}
+        {% for mensaje in  messages %}
+        <span class="alert alert-danger"> {{ mensaje }}</span>
+        {% endfor %}
+        {% endif %}
+      {{ form | crispy }}
+    </table>
+    <div class="enviar">
+    <button type="submit" style="width: 30%" />Entrar</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+
+</div>
+    <!-- Tabla -->
+    <div class="col-lg-4">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>NOMBRE</th>
+              <th>DESCRIPCION</th>
+              <th>PRECIO</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if request.session.car.items %}
+            {% for k, v in request.session.car.items %}
+            <tr>
+              <td>{{v.categorie}}<a class="text-bg-warning" href="{% url "car:delA" v.pedo_id %}"> Del</a></td>
+              <td class=""> <span class="text-danger">cant: </span>{{v.cant}}</td>
+              <td>
+                <a href="{% url 'car:agg' v.pedo_id %}"
+                class="btn btn-sm btn-success">+</a
+              >
+              <a href= {% url "car:red" v.pedo_id %} class="btn btn-sm btn-success">-</a>
+                {{v.price}}</td>
+            </tr>
+            
+            {% endfor %} 
+            {% else %}
+            <div>NO HAY PRODUCTOS</div>
+            {% endif %}
+            <tr>
+              <td colspan="2">Total</td>
+              <td>{{valtotal}}</td>
+            </tr>
+          </tbody>
+        </div>
+      </table>
+      <div class="d-flex justify-content-center gap-2">
+        {% if request.user.is_authenticated and not request.session.car.items%}
+        no esta auth o no tiene articulos
+        {% elif request.session.car.items and not request.user.is_authenticated %}
+        <a class="text-black" href="{% url "logear" %}">solo para cotizar -> iniciar sesion o reg xra shop</a>
+        <button  class="btn btn-danger"  type="button"><a href="{% url "car:cln" %}" 
+          class="text-decoration-none text-black">Limpiar ⚠</a></button>
+        {% elif request.session.car.items and request.user.is_authenticated %}
+          auth y articles listos para comprar
+          <button class="btn btn-primary" type="button"><a  href="{% url "page"%}" 
+            class="text-decoration-none text-white">PAGAR ✅</a></button>
+          <button class="btn btn-danger"  type="button"><a href="{% url "car:cln" %}" 
+            class="text-decoration-none text-black">Limpiar ⚠</a></button>
+        {% endif %}
+        <button id="reloadButton" class="btn btn-primary" type="button">recarga 🔂</button>
+          <script>
+            document.getElementById('reloadButton').addEventListener('click', function() {
+                location.reload();
+            });
+        </script>
+      </div>
+    </div>
+</div>

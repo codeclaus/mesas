@@ -1,0 +1,76 @@
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  background: #064e24;
+  background-image: radial-gradient(circle, #ff7e5f, #feb47b);
+}
+header {
+  background-color: #35424a;
+  color: rgb(142, 255, 35);
+  text-align: center;
+  padding: 1rem;
+}
+nav {
+  background-color: #4178af;
+  padding: 10px 0;
+}
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+nav ul li {
+  display: inline;
+  margin-right: 20px;
+}
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+nav ul li a:hover {
+  color: #ecf0f1;
+}
+main {
+  padding: 20px;
+  background-color: white;
+  margin-top: 20px;
+}
+/* Estilos personalizados adicionales */
+.navbar {
+  background-color: #35424a;
+}
+.jumbotron {
+  background-color: #f4f4f4;
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+}
+/* Estilos personalizados adicionales */
+.navbar {
+  background-color: #35424a;
+}
+.jumbotron {
+  background-color: #f4f4f4;
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+}
+footer {
+  background-color: #35424a;
+  color: white;
+  padding: 20px 0;
+  margin-top: 2rem;
+}
+.offcanvas {
+  max-width: 300px;
+}
+.custom-link {
+  background-color: transparent; /* Fondo inicial */
+  transition: background-color 0.3s ease; /* Transición suave */
+}
+
+.custom-link:hover {
+  background-color: #f0f0f0; /* Color de fondo al pasar el cursor */
+}

@@ -1,0 +1,193 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi Página Web con Bootstrap 5</title>
+    <link rel="stylesheet" href="{% static "styles.css" %}" />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body data-bs-spy="scroll"
+  data-bs-target="#navbar-example"
+  data-bs-offset="0"
+  tabindex="0">
+    <nav id="navbar-example" class="navbar navbar-expand-lg pt-4 pb-4">
+      <div class="container-fluid fixed-top">
+        <a class="navbar-brand" href="{% url "home" %}">PAGINA WEB</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav nav-pills">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url "home" %}#inicio"
+              >Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#sobre">About us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#servicios">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contacto">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Personal Blog</a>
+          </li>
+        </ul>
+      </div>
+      <div class="d-flex text-justify-end">
+        {% if user.is_authenticated %}
+        <a href="{% url "close" %}" class="text-danger text-decoration-none ">CERRAR SESION <br />{{ user.username}}</a>
+        {% else %} 
+        <a href="{% url 'logear' %}"><span class="text-success">INICIAR SESION</span></a>
+        {% endif %}
+      </div>
+      </div>
+
+    </nav>
+    <!-- Aside de inicio de sesión -->
+  <button
+    class="btn btn-outline-light position-fixed top-50 end-0 translate-middle-y"
+    type="button"
+    data-bs-toggle="offcanvas"
+    data-bs-target="#loginOffcanvas"
+    aria-controls="loginOffcanvas"
+  >
+  {% if user.is_authenticated %}
+  
+  <a href="{% url "close" %}" class="text-danger text-decoration-none ">CERRAR SESION <br />{{ user.username}}</a>
+  {% else %} 
+  <span class="text-success">INICIAR SESION</span>
+  {% endif %}
+  </button>
+  
+  <!-- Aside de inicio de sesión -->
+  <div
+    class="offcanvas offcanvas-end"
+    tabindex="-1"
+    id="loginOffcanvas"
+    aria-labelledby="loginOffcanvasLabel"
+  >
+    <div class="offcanvas-header">
+      
+      <h5 class="offcanvas-title" id="loginOffcanvasLabel">Iniciar Sesión</h5>
+      <button
+        type="button"
+        class="btn-close text-reset"
+        data-bs-dismiss="offcanvas"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="offcanvas-body">
+      <form action="{% url 'logear2' %}" method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="username" class="form-label">nombre usuario</label>
+          <input type="text" class="form-control" id="username" name="username" required />
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Contraseña</label>
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            id="password"
+            required
+          />
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="rememberMe" />
+          <label class="form-check-label" for="rememberMe">Recordarme</label>
+        </div>
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+        </div>
+        {% if error %}
+        <p style="color: red;">{{ error }}</p>{% endif %}
+      </form>
+      <hr />
+      <p class="text-center">¿No tienes una cuenta?</p>
+      <div class="d-grid">
+        <a href="{% url 'register2' %}">presiona aqui, luego vuelve y click en registrar SOL-PEN</a>
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#registerForm"
+          aria-expanded="false"
+          aria-controls="registerForm">Registrarse
+          </button>
+          
+        <div class="collapse mt-3" id="registerForm">
+          <form method="post" action="">
+          {% load crispy_forms_tags %}
+          <form action="" method="POST">
+            {% csrf_token %} {{ form | crispy }}
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    {% block content %}{% endblock content %}
+
+    <footer class="mt-auto">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h5>Sobre Nosotros</h5>
+            <p>
+              Breve descripción de tu empresa o proyecto. Puedes incluir tu
+              misión o valores principales aquí.
+            </p>
+          </div>
+          <div class="col-md-4">
+            <h5>Enlaces Rápidos</h5>
+            <ul class="list-unstyled">
+              <li><a href="#inicio" class="text-white">Inicio</a></li>
+              <li><a href="#sobre-mi" class="text-white">Sobre Mí</a></li>
+              <li><a href="#servicios" class="text-white">Servicios</a></li>
+              <li><a href="#contacto" class="text-white">Contacto</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h5>Contacto</h5>
+            <address>
+              <strong>Mi Empresa</strong><br />
+              123 Calle Principal<br />
+              Ciudad, País 12345<br />
+              <abbr title="Teléfono">T:</abbr> (123) 456-7890
+            </address>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <p>&copy; 2024 Mi Sitio Web. Todos los derechos reservados.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
